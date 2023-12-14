@@ -7,7 +7,10 @@ const router = express.Router();
  */
 router.get('/', (req, res) => {
   const query = `
-    SELECT * FROM "item"
+    SELECT "item".id, "item".description, "item".image_url, "user".username
+    FROM "item"
+    JOIN "user"
+      ON "user".id = "item".user_id
   `
   pool
     .query(query)
