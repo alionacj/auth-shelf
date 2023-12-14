@@ -90,14 +90,28 @@ router.put('/:id', (req, res) => {
  * they have added to the shelf
  */
 router.get('/count', (req, res) => {
-  // endpoint functionality
+  const query = `
+  SELECT "user".username, COUNT("item".id)
+	  FROM "user"
+	  JOIN "item"
+		  ON "user".id = "item".user_id
+	  GROUP BY "item".id, "user".username;
+  `
+  pool
+    .query(query)
+    .then(result => {
+      res.send(result.rows)
+    })
+    .catch((err) => {
+      console.error('count GET route failed:', err)
+    })
 });
 
 /**
  * Return a specific item by id
  */
 router.get('/:id', (req, res) => {
-  // endpoint functionality
+  
 });
 
 module.exports = router;
