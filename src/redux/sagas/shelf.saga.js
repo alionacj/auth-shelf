@@ -21,7 +21,7 @@ function* deleteItem(action) {
     try {
         const response = yield axios({
             method: 'DELETE',
-            url: `/api/shelf/${action.payload.id}`,
+            url: `/api/shelf/${action.payload}`,
         })
         yield fetchItems()
     }
