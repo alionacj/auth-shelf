@@ -111,7 +111,18 @@ router.get('/count', (req, res) => {
  * Return a specific item by id
  */
 router.get('/:id', (req, res) => {
-  
+  const query = `
+  SELECT * FROM "item"
+    WHERE "item".id = ${req.params.id}
+  `
+  pool
+  .query(query)
+  .then(result => {
+    res.send(result.rows)
+  })
+  .catch((err) => {
+    console.error('item GET route failed:', err)
+  })
 });
 
 module.exports = router;
