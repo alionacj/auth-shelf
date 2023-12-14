@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import ShelfItem from '../ShelfItem/ShelfItem';
+import ShelfForm from '../ShelfForm/ShelfForm';
 
 
 function ShelfPage() {
@@ -17,7 +18,7 @@ function ShelfPage() {
     image_url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Motorboat_at_Kankaria_lake.JPG/1200px-Motorboat_at_Kankaria_lake.JPG',
     username: 'James'
   }]
-  
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch({ type: 'FETCH_ITEMS'})
@@ -28,9 +29,10 @@ function ShelfPage() {
       <h2>Shelf</h2>
       <p>All of the available items can be seen here.</p>
       {dummyData.map((item) => {
-        {console.log('shelf item', item)}
           return <ShelfItem item={item} key={item.id}/>
       })}
+
+      <ShelfForm />
     </div>
   );
 }
